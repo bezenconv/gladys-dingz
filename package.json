@@ -1,6 +1,6 @@
 {
   "name": "gladys-dingz",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "description": "Gladys Assistant external integration for dingz smart switches (iolo AG), over their local REST API.",
   "type": "module",

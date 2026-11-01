@@ -10,6 +10,8 @@ the notes of the version's GitHub Release.
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-11-01
+
 ### Added
 
 - Discovery of the dingz through their UDP announcements (port 7979), plus
@@ -20,3 +22,6 @@ the notes of the version's GitHub Release.
 - Fast follow-up reads after a command, until a blind stops moving.
 - Configuration actions: search and test the dingz, identify a dingz by
   blinking its LED.
+
+[Unreleased]: https://github.com/bezenconv/gladys-dingz/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/bezenconv/gladys-dingz/releases/tag/v0.1.0
