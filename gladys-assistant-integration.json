@@ -1,0 +1,97 @@
+{
+  "manifest_version": 1,
+  "type": "device",
+  "name": "dingz",
+  "description": {
+    "en": "Unofficial: dingz smart switches (iolo) on your network: lights, dimmers, blinds, sensors.",
+    "fr": "Non officiel : interrupteurs dingz (iolo) en local : lumières, variateurs, stores, capteurs."
+  },
+  "version": "0.0.0",
+  "docker_image": "ghcr.io/bezenconv/gladys-dingz:0.0.0",
+  "gladys_version": ">=5.1.0",
+  "cover_image": "https://raw.githubusercontent.com/bezenconv/gladys-dingz/main/cover.png",
+  "categories": ["lighting", "environment"],
+  "transports": ["local"],
+  "network_discovery": [{ "type": "udp-broadcast", "ports": [7979] }],
+  "config_schema": [
+    {
+      "key": "intro",
+      "type": "section",
+      "label": { "en": "dingz", "fr": "dingz" },
+      "description": {
+        "en": "Unofficial connector, not affiliated with iolo AG. It drives the dingz through their local REST API (no cloud): one device per dingz with its lights and dimmers, its blinds (position and slats), its temperature, light level and motion sensors. The dingz are found automatically through their UDP announcements; you can also enter their addresses below.",
+        "fr": "Connecteur non officiel, sans lien avec iolo AG. Il pilote les dingz par leur API REST locale (sans cloud) : un appareil par dingz avec ses lumières et variateurs, ses stores (position et lamelles), ses capteurs de température, de luminosité et de mouvement. Les dingz sont trouvés automatiquement par leurs annonces UDP ; vous pouvez aussi saisir leurs adresses ci-dessous."
+      },
+      "links": [
+        {
+          "url": "https://github.com/bezenconv/gladys-dingz/blob/main/docs/fr.md",
+          "label": { "en": "Guide (French)", "fr": "Guide (français)" }
+        },
+        {
+          "url": "https://github.com/bezenconv/gladys-dingz/blob/main/docs/en.md",
+          "label": { "en": "Guide (English)", "fr": "Guide (anglais)" }
+        }
+      ]
+    },
+    {
+      "key": "hosts",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "label": { "en": "dingz addresses", "fr": "Adresses des dingz" },
+      "description": {
+        "en": "Optional. IP addresses (or host names) of your dingz, separated by commas. Needed only if the automatic discovery does not find them, e.g. when they are on another VLAN. Give them a fixed address in your router.",
+        "fr": "Facultatif. Adresses IP (ou noms d'hôte) de vos dingz, séparées par des virgules. Utile seulement si la découverte automatique ne les trouve pas, par exemple s'ils sont sur un autre VLAN. Donnez-leur une adresse fixe dans votre routeur."
+      },
+      "placeholder": {
+        "en": "e.g. 192.168.1.20, 192.168.1.21",
+        "fr": "ex. 192.168.1.20, 192.168.1.21"
+      }
+    },
+    {
+      "key": "udp_discovery",
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "label": { "en": "Automatic discovery (UDP)", "fr": "Découverte automatique (UDP)" },
+      "description": {
+        "en": "Listen to the announcements the dingz broadcast on UDP port 7979 (same network as Gladys only).",
+        "fr": "Écoute les annonces diffusées par les dingz sur le port UDP 7979 (même réseau que Gladys uniquement)."
+      }
+    },
+    {
+      "key": "refresh_interval",
+      "type": "number",
+      "required": false,
+      "default": 5,
+      "min": 2,
+      "max": 300,
+      "label": { "en": "Refresh interval (s)", "fr": "Intervalle de rafraîchissement (s)" },
+      "description": {
+        "en": "Seconds between two reads of each dingz (5 by default). Also the delay before Gladys sees a switch pressed by hand or a motion.",
+        "fr": "Secondes entre deux lectures de chaque dingz (5 par défaut). C'est aussi le délai avant que Gladys voie un bouton pressé à la main ou un mouvement."
+      }
+    }
+  ],
+  "actions": [
+    {
+      "key": "test_connection",
+      "label": { "en": "Search and test the dingz", "fr": "Rechercher et tester les dingz" },
+      "timeout_seconds": 60
+    },
+    {
+      "key": "identify",
+      "label": { "en": "Identify a dingz", "fr": "Identifier un dingz" },
+      "timeout_seconds": 20,
+      "fields": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "label": { "en": "dingz", "fr": "dingz" },
+          "required": true
+        }
+      ]
+    }
+  ]
+}
